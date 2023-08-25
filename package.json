@@ -1,14 +1,26 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "note-taker-expressjs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Javier Morales",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.16.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elchinatalpf/Note-Taker-Express.js.git"
+  },
+  "keywords": [
+    "expressjs"
+  ],
+  "bugs": {
+    "url": "https://github.com/elchinatalpf/Note-Taker-Express.js/issues"
+  },
+  "homepage": "https://github.com/elchinatalpf/Note-Taker-Express.js#readme"
 }
