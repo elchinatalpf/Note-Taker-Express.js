@@ -1,14 +1,15 @@
 const path = require('path');
 
-function htmlRoutes (app) {
+module.exports = (app) => {
 
   app.get('/note', (req, res) => {
     res.sednFile(path.join(__dirname, '../public/notes.html'))
   });
-
+  
   app.get('*', (req, res) => {
     res.sednFile(path.join(__dirname, '../public/index.html'))
   });
+  
 }
 
 
