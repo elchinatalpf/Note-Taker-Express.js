@@ -9,7 +9,8 @@ module.exports = (app) => {
   });
 
   app.post('/api/notes', (req, res) => {
-    
+    db.readFileSync('../db/db.json');
+
   });
 
 }

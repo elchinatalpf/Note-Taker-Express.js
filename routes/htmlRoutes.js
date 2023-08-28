@@ -1,22 +1,13 @@
 const path = require('path');
+const router = require('express').Router();
 
-module.exports = (app) => {
 
-  app.get('*', (req, res) => {
+  router.get('*', (req, res) => {
     res.sednFile(path.join(__dirname, '../public/index.html'))
   });
-  
-  app.get('/note', (req, res) => {
+
+  router.get('/note', (req, res) => {
     res.sednFile(path.join(__dirname, '../public/notes.html'))
   });
-  
-  
-}
 
-
-module.exports = htmlRoutes;
-
-
-// GIVEN a note-taking application
-// WHEN I open the Note Taker
-// THEN I am presented with a landing page with a link to a notes page
+module.exports = router;
