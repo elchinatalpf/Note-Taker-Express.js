@@ -3,16 +3,16 @@ const router = require('express').Router();
 var { v4: uuidv4 } = require('uuid');
 const path = require('path');
 
-  // router.get('/api/notes', (req, res) => {
-  //   res.sendFile(path.join(__dirname, '../db/db.json'));
-  // });
-
-
-  router.get("/api/notes", (req, res) => {
-    const jsonDb = JSON.parse(fs.readFileSync ('../db/db.json', 'utf8'));
-    res.json(jsonDb);
-    
+  router.get('/api/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, '../db/db.json'));
   });
+
+
+  // router.get("/api/notes", (req, res) => {
+  //   const jsonDb = JSON.parse(fs.readFileSync ('../db/db.json', 'utf8'));
+  //   res.json(jsonDb);
+    
+  // });
 
   router.post("/api/notes", (req, res) => {
     const jsonDb = JSON.parse(fs.readFileSync('../db/db.json', 'utf8'));
@@ -37,7 +37,7 @@ const path = require('path');
   //   fs.writeFileSync('../db/db.json', JSON.stringify(newNote));
   // });
 
-  
+
   // router.delete('/api/notes/:id', (req, res) => {
   //   fs.readFile('db/db.json', (err, data) => {
   //     const idNote = req.params.id;
