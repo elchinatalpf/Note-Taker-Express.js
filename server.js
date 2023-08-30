@@ -1,6 +1,6 @@
 const express = require('express');
 const { clog } = require('./middleware/clog');
-const api = require('./routes/index');
+const routes = require('./routes');
 
 
 const PORT = process.env.PORT || 3001;
@@ -8,14 +8,11 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(clog);
+app.use(express.static('public'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', api);
-app.use(express.static('public'));
-
-app.use('/api', apiRoutes);
-app.use('/', htmlRoutes);
+app.use(routes);
 
 app.listen(PORT, () => 
   console.log(`App listening at http://localhost:${PORT}`)

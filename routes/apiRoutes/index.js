@@ -1,29 +1,29 @@
 const { json } = require('express');
 const fs = require('fs');
-const apiRoutes = require('express').Router();
+const apiRouter = require('express').Router();
 var { v4: uuidv4 } = require('uuid');
 // const path = require('path');
 
 // maybe
-  // apiRoutes.get('/api/notes', (req, res) => {
+  // apiRouter.get('/notes', (req, res) => {
   //   res.sendFile(path.join(__dirname, '../db/db.json'));
   // });
 
-  // testing
-  apiRoutes.get('/api/notes', async (req, res) => {
-    const jsonDb = await JSON.parse(fs.readFileSync('db/db.json', 'utf8'));
-    return res.json(jsonDb);
-  });
-
   // better
-  // apiRoutes.get("/api/notes", (req, res) => {
+  // apiRouter.get("/notes", (req, res) => {
   //   const jsonDb = JSON.parse(fs.readFileSync ('../db/db.json', 'utf8'));
   //   return res.json(jsonDb);
     
   // });
 
+  // testing
+  apiRouter.get('/notes', async (req, res) => {
+    const jsonDb = await JSON.parse(fs.readFileSync('db/db.json', 'utf8'));
+    return res.json(jsonDb);
+  });
 
-  apiRoutes.post('/api/notes', (req, res) => {
+
+  apiRouter.post('/notes', (req, res) => {
     const dbJson = JSON.parse(fs.readFileSync("db/db.json","utf8"));
     const newFeedback = {
     title: req.body.title,
@@ -36,15 +36,15 @@ var { v4: uuidv4 } = require('uuid');
     });
 
     // better
-  // apiRoutes.post("/api/notes", (req, res) => {
-  //   const jsonDb = JSON.parse(fs.readFileSync('../db/db.json', 'utf8'));
+  // apiRouter.post("/notes", (req, res) => {
+  //   const jsonDb = JSON.parse(fs.readFileSync('db/db.json', 'utf8'));
   //   const newNote = {
   //     title: req.body.title,
   //     text: req.body.text,
   //     id: uuidv4(),
   //   };
   //   jsonDb.push(newNote);
-  //   fs.writeFileSync('../db/db.json', JSON.stringify(jsonDb));
+  //   fs.writeFileSync('db/db.json', JSON.stringify(jsonDb));
   //   res.json(jsonDb);
 
   // });
@@ -52,17 +52,17 @@ var { v4: uuidv4 } = require('uuid');
 
 // DELETE SECTION
     // MAYBE 
-  // router.delete('/api/notes:id', (req, res) => {
-  //   let dataID = fs.readFileSync('../db/db.json', 'utf8');
-  //   const dataJSON = JSON.parse(dataID);
-  //   const newNote = dataJSON.filter((note) => {
-  //     return note.ide !== req.params.id;
-  //   });
-  //   fs.writeFileSync('../db/db.json', JSON.stringify(newNote));
-  // });
+  apiRouter.delete('/notes:id', (req, res) => {
+    let dataID = fs.readFileSync('../db/db.json', 'utf8');
+    const dataJSON = JSON.parse(dataID);
+    const newNote = dataJSON.filter((note) => {
+      return note.ide !== req.params.id;
+    });
+    fs.writeFileSync('../db/db.json', JSON.stringify(newNote));
+  });
 
     // STILL FOR TEST
-  // router.delete('/api/notes/:id', (req, res) => {
+  // apiRouter.delete('/api/notes/:id', (req, res) => {
   //   fs.readFile('db/db.json', (err, data) => {
   //     const idNote = req.params.id;
   //     let notesO;
@@ -80,4 +80,4 @@ var { v4: uuidv4 } = require('uuid');
   //   res.sendFile(path.join(__dirname, 'db/db.json'));
   // });
 
-  module.exports = router;
+  module.exports = apiRouter;
