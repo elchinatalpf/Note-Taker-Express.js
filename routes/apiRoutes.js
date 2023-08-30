@@ -1,33 +1,57 @@
+const { json } = require('express');
 const fs = require('fs');
-const router = require('express').Router();
+const apiRoutes = require('express').Router();
 var { v4: uuidv4 } = require('uuid');
-const path = require('path');
+// const path = require('path');
 
-  router.get('/api/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, '../db/db.json'));
+// maybe
+  // apiRoutes.get('/api/notes', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '../db/db.json'));
+  // });
+
+  // testing
+  apiRoutes.get('/api/notes', async (req, res) => {
+    const jsonDb = await JSON.parse(fs.readFileSync('db/db.json', 'utf8'));
+    return res.json(jsonDb);
   });
 
-
-  // router.get("/api/notes", (req, res) => {
+  // better
+  // apiRoutes.get("/api/notes", (req, res) => {
   //   const jsonDb = JSON.parse(fs.readFileSync ('../db/db.json', 'utf8'));
-  //   res.json(jsonDb);
+  //   return res.json(jsonDb);
     
   // });
 
-  router.post("/api/notes", (req, res) => {
-    const jsonDb = JSON.parse(fs.readFileSync('../db/db.json', 'utf8'));
-    const newNote = {
-      title: req.body.title,
-      text: req.body.text,
-      id: uuidv4(),
+
+  apiRoutes.post('/api/notes', (req, res) => {
+    const dbJson = JSON.parse(fs.readFileSync("db/db.json","utf8"));
+    const newFeedback = {
+    title: req.body.title,
+    text: req.body.text,
+    id: uuidv4(),
     };
-    jsonDb.push(newNote);
-    fs.writeFileSync('../db/db.json', JSON.stringify(jsonDb));
-    res.json(jsonDb);
+    dbJson.push(newFeedback);
+    fs.writeFileSync("db/db.json",JSON.stringify(dbJson));
+    res.json(dbJson);
+    });
 
-  });
+    // better
+  // apiRoutes.post("/api/notes", (req, res) => {
+  //   const jsonDb = JSON.parse(fs.readFileSync('../db/db.json', 'utf8'));
+  //   const newNote = {
+  //     title: req.body.title,
+  //     text: req.body.text,
+  //     id: uuidv4(),
+  //   };
+  //   jsonDb.push(newNote);
+  //   fs.writeFileSync('../db/db.json', JSON.stringify(jsonDb));
+  //   res.json(jsonDb);
+
+  // });
 
 
+// DELETE SECTION
+    // MAYBE 
   // router.delete('/api/notes:id', (req, res) => {
   //   let dataID = fs.readFileSync('../db/db.json', 'utf8');
   //   const dataJSON = JSON.parse(dataID);
@@ -37,7 +61,7 @@ const path = require('path');
   //   fs.writeFileSync('../db/db.json', JSON.stringify(newNote));
   // });
 
-
+    // STILL FOR TEST
   // router.delete('/api/notes/:id', (req, res) => {
   //   fs.readFile('db/db.json', (err, data) => {
   //     const idNote = req.params.id;
