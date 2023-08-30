@@ -1,10 +1,13 @@
 const express = require('express');
 const apiRoutes = require('./routes/apiRoutes');
 const htmlRoutes = require('./routes/htmlRoutes');
+const { clog } = require('./middleware/clog');
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+app.use(clog);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
