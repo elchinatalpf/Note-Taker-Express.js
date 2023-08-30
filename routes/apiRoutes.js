@@ -7,34 +7,41 @@ const path = require('path');
 
 // https://www.npmjs.com/package/uniqid
 
-  router.get('/notes', (req, res) => {
+  router.get('/api/notes', (req, res) => {
     fs.readFile (path.join(__dirname, "../db/db.json"), (err, data) => {
-      if (err) throw err;
       console.log(JSON.parse(data));
-
+      
       res.send(data);
     });
   });
-
   
-  router.post('/notes', (req, res) => {
-    let userNotes = [];
+  
+  router.post('/api/notes', (req, res) => {
     let newNote = {
       title: req.body.title,
       text: req.body.text,
       id: uniqid()
-    }
+    };
     fs.readFile(path.join(__dirname, "../db/db.json"), (err, data) => {
-      if (err) throw err;
-      let userNotes = JSON.parse(data);
-      userNotes.push(newNote);
+      let userNotes = [];
+      if (err) {
+        console.log(err)
+      }
+      const notesData = JSON.parse(data);
+      notesData.push(newNote);
+      userNotes = JSON.stringify(notesData, null, 2);
       
-      fs.writeFile(__dirname, "../db/db.json", JSON.stringify(userNotes), "utf-8", (err) => {
-        if (err) throw err;
-        res.send('Your NOTE was saved!');
+      fs.writeFile(path.join(__dirname, "../db/db.json", userNotes ), (err) => {
+        if (err) {
+          console.log(err);
+        }
+        res.sendFile(path.join(__dirname, './db/db.json'));
       });
     });
   });
+  
+
+
   
   module.exports = router;
 
