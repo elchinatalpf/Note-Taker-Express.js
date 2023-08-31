@@ -11,6 +11,7 @@ This project is a simple yet powerful note-taking application built with Node.js
   * [Usage](#usage)
   * [License](#license)
   * [Resources](#Resources)
+  * [Deployment](#deployment)
   * [Questions](#questions)
   
   ## Installation
@@ -28,7 +29,10 @@ This project is a simple yet powerful note-taking application built with Node.js
    * https://www.npmjs.com/package/uuid
    * https://expressjs.com/
    * https://medium.com/@simonescigliuzzi/creating-a-pretty-console-for-your-nodejs-applications-81a713353554
-   
+
+   ## Deployment
+   Temporary deployment link in Heroku
+   * https://notes-take-express-f6b158e64ef2.herokuapp.com/
 
    ## Questions
    If you have any question contact me through my GitHub account.
